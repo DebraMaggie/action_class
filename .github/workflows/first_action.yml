@@ -11,3 +11,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: greetings
         run: echo "Hello people" Welcome to programming
+  job-two:
+     runs-on: windows-latest
+     steps:
+       - uses: actions/checkout@v4
+       - name: introduction
+         run: echo "Programming is giving commands to a computer to run a specific task"

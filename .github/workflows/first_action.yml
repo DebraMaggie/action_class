@@ -8,7 +8,7 @@ jobs:
   job-one:
     runs-on: ubuntu-latest
     outputs:
-      ask: ${{steps.get_output.msg}}
+      ask: ${{steps.get_output.outputs.msg}}
     steps:
       - uses: actions/checkout@v4
       
@@ -16,14 +16,14 @@ jobs:
         run: echo "Hello people, Welcome to programming"
 
       - name: get_output
-      - id: get_output
+        id: get_output
         run: echo "msg=Name Please" >> "$GITHUB_OUPUT"
         
   job-two:
      needs: job-one
      runs-on: ubuntu-latest
      outputs:
-       reply: ${{steps.response.msg}}
+       reply: ${{steps.response.outputs.msg}}
      steps:
        - uses: actions/checkout@v4
        
@@ -31,7 +31,7 @@ jobs:
          run: echo "Message from job one ${{needs.job-one.outputs.ask}}"
 
        - name: response
-       - id: response
+         id: response
          run: echo "msg=Hello Debbie, Nice to meet yah" >> "$GITHUB_OUTPUT"
 
   job-three: 

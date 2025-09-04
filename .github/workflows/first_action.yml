@@ -17,7 +17,7 @@ jobs:
 
       - name: get_output
         id: get_output
-        run: echo "msg=Name Please" >> "$GITHUB_OUPUT"
+        run: echo "msg=Name Please" >> $GITHUB_OUPUT
         
   job-two:
      needs: job-one
@@ -32,7 +32,7 @@ jobs:
 
        - name: response
          id: response
-         run: echo "msg=Hello Debbie, Nice to meet yah" >> "$GITHUB_OUTPUT"
+         run: echo "msg=Hello Debbie, Nice to meet yah" >> $GITHUB_OUTPUT
 
   job-three: 
     needs: job-two

@@ -7,13 +7,41 @@ on:
 jobs:
   job-one:
     runs-on: ubuntu-latest
+    outputs:
+      ask: ${{steps.get_output.msg}}
     steps:
       - uses: actions/checkout@v4
+      
       - name: greetings
-        run: echo "Hello people" Welcome to programming
+        run: echo "Hello people, Welcome to programming"
+
+      - name: get_output
+      - id: get_output
+        run: echo "msg=Name Please" >> "$GITHUB_OUPUT"
+        
   job-two:
+     needs: job-one
      runs-on: ubuntu-latest
+     outputs:
+       reply: ${{steps.response.msg}}
      steps:
        - uses: actions/checkout@v4
+       
        - name: introduction
-         run: echo "Programming is giving commands to a computer to run a specific task"
+         run: echo "Message from job one ${{needs.job-one.outputs.ask}}"
+
+       - name: response
+       - id: response
+         run: echo "msg=Hello Debbie, Nice to meet yah" >> "$GITHUB_OUTPUT"
+
+  job-three: 
+    needs: job-two
+    runs-on: ubuntu-latest
+    steps: 
+      - name: reply
+        run: echo "Message from job-two ${{needs.job-two.outputs.reply}}"
+    
+     
+
+         
+         
